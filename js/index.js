@@ -1,93 +1,91 @@
 // Your code goes here
-// 1. function to handle menu hover effect (mouseover)
-const menuHover = (element) => {
-    element.addEventListener('mouseover', (e) => {
-        e.target.style.color = 'black';
-        e.target.style.backgroundColor = 'red';
-        e.target.style.padding = '.3rem .5rem';
-    });
-    // removes hover effects 
-    element.addEventListener('mouseleave', (e) => {
-      e.target.style.color = '';
-      e.target.style.backgroundColor = '';
-      e.target.style.padding = '';
-    });
-  }
-  // h2 style on mouse enter 
-const headingStyle = (element) => {
-    element.addEventListener('mouseenter', (e) => {
-        e.target.style.transform = 'scale(2.0)';
-        e.target.style.color = 'blue';
-    })
-    element.addEventListener('mouseleave', (e) => {
-        e.target.style.transform = '';
-        e.target.style.color = '';
-    });
-  }
-  // turn Navigation items to have a different background on mouseover
-  const menuItem = document.querySelectorAll('.nav-link');
-  menuItem.forEach(menuHover);
-  //  style the h2 elements on hover 
-  const h1El = document.querySelectorAll('h1');
-  h1El.forEach(headingStyle);
-  const h2El = document.querySelectorAll('h2');
-  h2El.forEach(headingStyle);
-  const h4El = document.querySelectorAll('h4');
-  h4El.forEach(headingStyle);
+// 1.  (mouseover)
+const allMenuItems = document.querySelectorAll('.nav-link')
 
-  // 2. notify the visitor on first load (load event)
-document.querySelector('.intro img').addEventListener('load', (e) => {
-    const divEl = document.createElement('div');
-    divEl.appendChild(document.createTextNode("Hello!"));
-    const parentEl = document.querySelector('.intro')
-    const h2El = document.querySelector('.intro h2');
-    parentEl.insertBefore(divEl, h2El);
-  
-    document.querySelector('.main-navigation').style.position = 'relative';
-    document.querySelector('.intro').style.position = 'relative';
-    document.querySelector('.intro').style.padding= '0 0 10px';
-  
-    divEl.style.position = 'absolute';
-    divEl.style.top = '40%';
-    divEl.style.left = '20%';
-    divEl.style.color = 'red';
-    divEl.style.fontSize = '2rem';
-    divEl.style.margin = '0 auto';
+allMenuItems.forEach((a) => {
+  a.addEventListener("mouseenter", (event) => {
+    a.style.fontWeight = "bold"
   });
-  
-  // 3. (doubleclick event) for the button 
-  let button = document.querySelector('.btn');
-  button.addEventListener('dblclick', (event) => {
-    alert('Thank you for the double click!')
-    });
-  
-  // 4. (Wheel event)
-function zoom(event) {
-  event.preventDefault();
-    if (event.deltaY < 1) {
-    // Zoom in
-      scale *= event.deltaY * -1;
-    }
-    else {
-    // Zoom out
-      scale /= event.deltaY * 5;
-    }
-// Restrict scale
-scale = Math.min(Math.max(.5, scale), 1);
-// Apply scale transform
-el.style.transform = `scale(${scale})`;
-}
-let scale = 1;
-const el = document.querySelector('img');
-document.onwheel = zoom;
-    
-// 5. Resize event
-const heightOutput = document.querySelector('#height');
-const widthOutput = document.querySelector('#width');
-function reportWindowSize() {
-  heightOutput.textContent = window.innerHeight;
-  widthOutput.textContent = window.innerWidth;
-}
-window.onresize = reportWindowSize;
+  a.addEventListener("mouseleave", (event) => {
+    a.style.fontWeight = "normal"
+  });
+  a.addEventListener('click', event => {
+    event.preventDefault()
+  });
+});
 
- //6. 
+// 2. (keydown)
+const bodyKeyDown = document.querySelector('body')
+const funBusLogo = document.querySelector('.logo-heading')
+
+bodyKeyDown.addEventListener("keydown", (event) => {
+  if(event.keyCode === 70){
+    funBusLogo.style.fontWeight = "bold"
+    console.log("You just put the F in Fun Bus!")
+  }
+});
+
+// 3. (wheel)
+const funBusImg = document.querySelector('.intro img')
+const header = document.querySelector('.main-navigation')
+
+header.style.zIndex = "1000"
+
+funBusImg.addEventListener("wheel", z => {
+  console.log("scroll", z.deltaY)
+  if(z.deltaY > 0){
+    //scroll up
+    funBusImg.style.transform = "scale(.5)"
+  }else{
+    //scroll down
+    funBusImg.style.transform = "scale(1)"
+  }
+});
+
+// 4. (drag / drop)
+const images = document.querySelectorAll("img")
+images.forEach((x) => {
+  x.addEventListener("drag", (event) => {
+    event.preventDefault()
+    // console.log("denied")
+    // this prevents the drag of an image
+  });
+});
+
+// 5. (load)
+window.addEventListener("load", (event) =>{
+  if(event.returnValue === true){
+    console.log("Page loaded successfully")
+  }else{
+    console.log("Something went wrong")
+  }
+});
+
+// 6. (focus)
+const inputBox = document.querySelector('input')
+  inputBox.addEventListener('focus', event => {
+    console.log("focus")
+  }, true)
+
+// .7 (resize)
+  window.addEventListener('resize', event => {
+    console.log(window.innerWidth, window.innerHeight)
+  });
+
+// .8 (scroll)
+window.addEventListener("scroll", event => {
+  console.log(`scroll event happened at ${event.timeStamp}`)
+});
+
+// .9 (select)
+inputBox.addEventListener('select', event => {
+  console.log("don't select the copyright!")
+});
+
+// .10 (dblclick)
+pText = document.querySelectorAll('p')
+pText.forEach( x => {
+  x.addEventListener('dblclick', event => {
+    x.style.fontWeight = "bold"
+  });
+});
