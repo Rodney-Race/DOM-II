@@ -1,7 +1,6 @@
 // Your code goes here
 // 1.  (mouseover)
-const allMenuItems = document.querySelectorAll('.nav-link')
-
+const allMenuItems = document.querySelectorAll('.nav-link, h2')
 allMenuItems.forEach((a) => {
   a.addEventListener("mouseenter", (event) => {
     a.style.fontWeight = "bold"
@@ -15,22 +14,16 @@ allMenuItems.forEach((a) => {
 });
 
 // 2. (keydown)
-const bodyKeyDown = document.querySelector('body')
-const funBusLogo = document.querySelector('.logo-heading')
-
-bodyKeyDown.addEventListener("keydown", (event) => {
-  if(event.keyCode === 70){
-    funBusLogo.style.fontWeight = "bold"
-    console.log("You just put the F in Fun Bus!")
-  }
+document.addEventListener('keydown', event => {
+  let keyHit = event.key;
+  let keyCody = event.keyCode;
+  alert(`You hit the ${keyHit} key`);
 });
 
 // 3. (wheel)
 const funBusImg = document.querySelector('.intro img')
 const header = document.querySelector('.main-navigation')
-
 header.style.zIndex = "1000"
-
 funBusImg.addEventListener("wheel", z => {
   console.log("scroll", z.deltaY)
   if(z.deltaY > 0){
@@ -47,7 +40,7 @@ const images = document.querySelectorAll("img")
 images.forEach((x) => {
   x.addEventListener("drag", (event) => {
     event.preventDefault()
-    // console.log("denied")
+     console.log("denied")
     // this prevents the drag of an image
   });
 });
@@ -69,8 +62,14 @@ const inputBox = document.querySelector('input')
 
 // .7 (resize)
   window.addEventListener('resize', event => {
-    console.log(window.innerWidth, window.innerHeight)
-  });
+  let newHeight = window.innerHeight;
+  let newWidth = window.innerWidth;
+
+  location.reload();
+
+  alert('Mobile view is at 500px and tablet is at 800px. Why you shrinking my browser man?');
+  alert(`My new height is ${newHeight} and new width is ${newWidth}`);
+});
 
 // .8 (scroll)
 window.addEventListener("scroll", event => {
@@ -83,9 +82,8 @@ inputBox.addEventListener('select', event => {
 });
 
 // .10 (dblclick)
-pText = document.querySelectorAll('p')
-pText.forEach( x => {
-  x.addEventListener('dblclick', event => {
-    x.style.fontWeight = "bold"
-  });
+const stopLink = document.querySelector('h2 p');
+stopLink.addEventListener('dblclick', (event) => {
+  card.style.backgroundColor = 'red';
+  console.log('menu item click');
 });
